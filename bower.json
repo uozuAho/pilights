@@ -6,8 +6,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.4.7",
-    "angular-route": "1.4.7",
-    "bootstrap": "3.3.5"
+    "angular": "1.4.x",
+    "angular-route": "1.4.x",
+    "bootstrap": "3.3.x",
+    "spectrum": "1.7.x"
   }
 }
