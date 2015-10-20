@@ -2,7 +2,7 @@ from flask import Flask, request
 
 DEBUG = True
 
-app = Flask(__name__, static_folder='app', static_url_path='')
+app = Flask(__name__, static_url_path='')
 app.config.from_object(__name__)
 
 
