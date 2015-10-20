@@ -1,9 +1,15 @@
+import sys
+
 from flask import Flask, request
+from py import neopixels
 
 DEBUG = True
+NUM_LEDS = 8
 
 app = Flask(__name__, static_url_path='')
 app.config.from_object(__name__)
+
+pixels = neopixels.new_instance(NUM_LEDS)
 
 
 @app.route('/')
@@ -13,10 +19,10 @@ def root():
 
 @app.route('/setcolor', methods=['POST'])
 def set_color():
-    r = request.form['r']
-    g = request.form['g']
-    b = request.form['b']
-    print(r, g, b)
+    r = int(request.form['r'])
+    g = int(request.form['g'])
+    b = int(request.form['b'])
+    pixels.set_all(r, g, b)
     return "OK"
 
 

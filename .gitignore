@@ -4,3 +4,8 @@ tmp
 .idea
 .DS_Store
 bower_components/
+
+# python stuff
+__pycache__
+*.pyc
+*.pyo
