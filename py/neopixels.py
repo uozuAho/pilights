@@ -8,11 +8,25 @@ except ImportError:
     mock = True
 
 
-def new_instance(num_leds):
-    if mock:
-        return NeoPixelsMock(num_leds)
-    else:
-        return NeoPixels(num_leds)
+def new_instance(num_leds, max_brightness=40):
+    pixels = NeoPixelsMock(num_leds) if mock else NeoPixels(num_leds)
+    return NeoPixelWrapper(pixels, max_brightness)
+
+
+class NeoPixelWrapper:
+
+    def __init__(self, pixels, max_brightness=40):
+        self.pixels = pixels
+        self.max_brightness = max_brightness
+
+    def set_all(self, r, g, b):
+        r = self._limit(r)
+        g = self._limit(g)
+        b = self._limit(b)
+        self.pixels.set_all(r, g, b)
+
+    def _limit(self, x):
+        return min(x, self.max_brightness)
 
 
 class NeoPixels:
