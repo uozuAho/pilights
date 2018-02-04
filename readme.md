@@ -26,7 +26,7 @@ sudo apt-get install python  # you've probably already got this. Make sure it's 
 sudo pip install flask
 npm install -g bower
 bower install
-./runDevServer.sh
+python flask-app.py
 ```
 
 You should now be able to open localhost:5000 in your browser & see a colour picker.
@@ -88,7 +88,8 @@ sudo apt-get install python-flask
 git clone https://github.com/uozuAho/pilights  # this project
 cd pilights
 bower install
-sudo runPiDevServer.sh
+# Note that sudo is required for hardware access to drive LEDs
+sudo python flask-app.py --host 0.0.0.0
 ```
 
 You should now be able to access the light controller web page at your raspberry
@@ -97,5 +98,5 @@ pi's IP address.
 
 -------------------------------------------------------------------------------
 # todo
-- set dev server address with cmd args
+- json web api
 - better colour picker - color & brightness sliders, no choose button
