@@ -1,8 +1,11 @@
 import sys
 import argparse
 
+# hacky way to allow importing other py modules (pi_pixels)
+sys.path.append('..')
+
 from flask import Flask, request
-from py import neopixels
+from pi_pixels import neopixels
 
 DESCRIPTION = """
 Web server for remote control of neopixels.
