@@ -9,3 +9,6 @@ bower_components/
 __pycache__
 *.pyc
 *.pyo
+
+# vscode stuff
+.vscode

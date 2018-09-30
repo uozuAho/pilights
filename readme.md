@@ -14,3 +14,6 @@ flask_pixels/
 
 pi_pixels/
   - control neopixels with a raspberry pi
+
+pygame_pixels/
+  - emulate pixels on the screen, using pygame
