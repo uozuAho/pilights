@@ -17,3 +17,9 @@ pi_pixels/
 
 pygame_pixels/
   - emulate pixels on the screen, using pygame
+
+
+# todo
+
+- Implement some patterns as Generators, use with pygame
+- Implement arduino as Displayer interface

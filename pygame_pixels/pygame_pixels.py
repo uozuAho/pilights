@@ -8,7 +8,7 @@ from presenter import Pixel
 
 
 BLACK = (0, 0, 0)
-LED_HEIGHT = 20
+LED_HEIGHT = 50
 LED_WIDTH = 20
 
 
@@ -43,7 +43,7 @@ class SimpleScrollGenerator:
 class PygamePixelDisplayer:
     """ Implements the displayer interface for the pixel presenter """
     def __init__(self, generate_pixels):
-        pixels = generate_pixels(0)
+        pixels = generate_pixels()
         self.pixels = [PygamePixel(LED_HEIGHT, LED_WIDTH, i * LED_WIDTH, 0) for i in range(len(pixels))]
         size = [LED_WIDTH * len(pixels), LED_HEIGHT]
         self.generate_pixels = generate_pixels
@@ -56,7 +56,7 @@ class PygamePixelDisplayer:
     def run(self):
         while True:
             ms = self.clock.tick(50)
-            for pgpixel, pixel in zip(self.pixels, self.generate_pixels(ms)):
+            for pgpixel, pixel in zip(self.pixels, self.generate_pixels()):
                 pgpixel.rgb = pixel.rgb
             self.render(self.pixels)
 

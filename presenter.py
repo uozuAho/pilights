@@ -2,15 +2,22 @@
 
 class Pixel:
     """ An RGB pixel """
-    def __init__(self):
-        self.rgb = [0, 0, 0]
+    def __init__(self, r=0, g=0, b=0):
+        self.rgb = [r, g, b]
+
+    def clear(self):
+        self.rgb[0] = 0
+        self.rgb[1] = 0
+        self.rgb[2] = 0
+
+    def copy_colour(self, pixel):
+        self.rgb[0] = pixel.rgb[0]
+        self.rgb[1] = pixel.rgb[1]
+        self.rgb[2] = pixel.rgb[2]
 
 class Generator:
-    def generate(self, time):
+    def generate(self):
         """ Generate an array of pixels
-
-        Parameters:
-            time: float: time since last call, in milliseconds
 
         Returns:
             Array(Pixel)
@@ -24,7 +31,7 @@ class Displayer:
             it's ready to display.
 
         Parameters:
-            generate: (time: float (s)) => Array(Pixel)
+            generate: () => Array(Pixel)
         """
         pass
 
