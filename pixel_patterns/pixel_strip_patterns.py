@@ -18,12 +18,13 @@ class BunchOfPatterns: # implements Generator
 
     def __init__(self):
         self.last_change_time = 0
-        self.current_generator = Rainbow(NUM_PIXELS)
+        self.current_generator = RainbowCycle(NUM_PIXELS)
         self.generator_idx = 0
         self.generators = [
             lambda: ColorWiper(NUM_PIXELS, Pixel(0, 255, 0), 30),
             lambda: TheatreChaser(NUM_PIXELS, Pixel(127, 127, 127), 50),
-            lambda: Rainbow(NUM_PIXELS)
+            lambda: Rainbow(NUM_PIXELS),
+            lambda: RainbowCycle(NUM_PIXELS)
         ]
 
     def generate(self):
@@ -89,6 +90,20 @@ class Rainbow:
         col_offset = (int(uptime * 1000) % 5120) // 20
         for i in range(len(self.pixels)):
             self.pixels[i].copy_colour(wheel(i + col_offset & 255))
+        return self.pixels
+
+
+class RainbowCycle:
+    def __init__(self, num_pixels):
+        self.pixels = [Pixel() for i in range(num_pixels)]
+        self.time_start = 0
+
+    def generate(self):
+        uptime = time.time() - self.time_start
+        col_offset = (int(uptime * 1000) % (5120 * 5)) // 100
+        for i in range(len(self.pixels)):
+            color = wheel(int(((i * 256 / len(self.pixels)) + col_offset)) & 255)
+            self.pixels[i].copy_colour(color)
         return self.pixels
 
 
