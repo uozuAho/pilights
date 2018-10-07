@@ -4,15 +4,10 @@ import time
 sys.path.append('..')
 
 from presenter import Pixel
-from pygame_pixels.pygame_pixels import create_displayer
 
 
 NUM_PIXELS = 40
 
-def main():
-    patterns = BunchOfPatterns()
-    with create_displayer(patterns.generate) as disp:
-        disp.run()
 
 class BunchOfPatterns: # implements Generator
 
@@ -40,11 +35,6 @@ class BunchOfPatterns: # implements Generator
         self.generator_idx = (self.generator_idx + 1) % len(self.generators)
         return self.generators[self.generator_idx]()
 
-
-def loop():
-    # rainbowCycle(20)
-    # theaterChaseRainbow(50)
-    pass
 
 class ColorWiper: # implements Generator
     def __init__(self, num_pixels, color, delay_ms):
@@ -116,7 +106,3 @@ def wheel(pos):
         return Pixel(0, pos * 3, 255 - pos * 3)
     pos -= 170
     return Pixel(pos * 3, 255 - pos * 3, 0)
-
-
-if __name__ == '__main__':
-    main()
