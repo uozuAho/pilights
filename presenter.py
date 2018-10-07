@@ -1,4 +1,4 @@
-# These interfaces are used by the presenter (sort of)
+# 'interfaces' reference for neopixel pattern generators and displayers
 
 class Pixel:
     """ An RGB pixel """

@@ -54,8 +54,14 @@ class PygamePixelDisplayer:
         self.generate_pixels = generate
 
     def run(self):
-        while True:
+        done = False
+        while not done:
             ms = self.clock.tick(50)
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.KEYDOWN:
+                    print('exiting due to keypress...')
+                    done = True
             for pgpixel, pixel in zip(self.pixels, self.generate_pixels()):
                 pgpixel.rgb = pixel.rgb
             self.render(self.pixels)
