@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>PiLights</title>
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="my.css">
+</head>
+
+<body>
+    <h1>Pi Lights</h1>
+    <button id="btn-off" type="button" class="btn btn-primary btn-lg btn-black">OFF</button>
+    <button id="btn-red" type="button" class="btn btn-primary btn-lg btn-red">All red</button>
+</body>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+$( document ).ready(function() {
+    $('#btn-off').on('click', function(e) {
+        $.post('alloff');
+    });
+    $('#btn-red').on('click', function(e) {
+        $.post('setall?color=red');
+    });
+});
+</script>
+</html>
