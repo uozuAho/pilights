@@ -79,7 +79,7 @@ class Rainbow:
         uptime = time.time() - self.time_start
         col_offset = (int(uptime * 1000) % 5120) // 20
         for i in range(len(self.pixels)):
-            self.pixels[i].copy_colour(wheel(i + col_offset & 255))
+            self.pixels[i].copy_colour(_wheel(i + col_offset & 255))
         return self.pixels
 
 
@@ -92,12 +92,12 @@ class RainbowCycle:
         uptime = time.time() - self.time_start
         col_offset = (int(uptime * 1000) % (5120 * 5)) // 100
         for i in range(len(self.pixels)):
-            color = wheel(int(((i * 256 / len(self.pixels)) + col_offset)) & 255)
+            color = _wheel(int(((i * 256 / len(self.pixels)) + col_offset)) & 255)
             self.pixels[i].copy_colour(color)
         return self.pixels
 
 
-def wheel(pos):
+def _wheel(pos):
     pos = 255 - pos
     if pos < 85:
         return Pixel(255 - pos * 3, 0, pos * 3)

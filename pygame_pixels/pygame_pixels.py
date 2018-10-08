@@ -16,7 +16,7 @@ class PygamePixelDisplayer:
     def __init__(self, generate_pixels):
         pygame.display.set_caption("pygame neopixels")
         pixels = generate_pixels()
-        self.pixels = [PygamePixel(LED_HEIGHT, LED_WIDTH, i * LED_WIDTH, 0) for i in range(len(pixels))]
+        self.pixels = [_PygamePixel(LED_HEIGHT, LED_WIDTH, i * LED_WIDTH, 0) for i in range(len(pixels))]
         size = [LED_WIDTH * len(pixels), LED_HEIGHT]
         self.generate_pixels = generate_pixels
         self.screen = pygame.display.set_mode(size)
@@ -55,7 +55,7 @@ class PygamePixelDisplayer:
         pygame.display.flip()
 
 
-class PygamePixel:
+class _PygamePixel:
     """ Pygame-aware pixel that can draw itself """
     def __init__(self, height, width, left, top):
         self.height = height
