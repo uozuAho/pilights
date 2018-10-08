@@ -29,7 +29,5 @@ pygame_pixels/
 
 # todo
 
-- cleanup:
-  - make clear what's public/private
 - merge to master
 - use patterns in flask_pixels
