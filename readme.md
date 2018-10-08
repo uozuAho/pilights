@@ -1,10 +1,13 @@
 # Raspberry Pi RGB Light Server
 -------------------------------
 
-A web app to control RGB leds (neopixels) on a raspberry pi and/or arduino.
+Various ways to control neopixels (RGB LEDs), including a web app which can be run
+on a raspberry pi.
 
 
 # Quick start
+
+Demo the LED patterns on a PC:
 
   python3 demo.py
 
@@ -12,13 +15,14 @@ A web app to control RGB leds (neopixels) on a raspberry pi and/or arduino.
 # Directory structure
 
 arduino_pixels/
-  - control neopixels with an arduino
+  - Control neopixels with an arduino. Contains arduino 'serial slave' firmware + serial host
+    app written in python.
 
 flask_pixels/
   - flask web app to control all the pixels
 
 pi_pixels/
-  - control neopixels with a raspberry pi
+  - Control neopixels with a raspberry pi, using the pi's IO pins.
 
 pixel_patterns/
   - neopixel strip patterns that can be used anywhere
@@ -29,5 +33,5 @@ pygame_pixels/
 
 # todo
 
-- merge to master
 - use patterns in flask_pixels
+- get more patterns from neogoggles

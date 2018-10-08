@@ -1,7 +1,15 @@
+import sys
 from pixel_patterns.pixel_strip_patterns import BunchOfPatterns
 
+
 DISPLAYER = 'pygame'
-# DISPLAYER = 'arduino'
+if len(sys.argv) == 1:
+    DISPLAYER = 'pygame'
+elif len(sys.argv) == 2:
+    DISPLAYER = sys.argv[1]
+else:
+    print('usage: python3 demo.py [pygame|arduino]')
+
 
 def create_displayer(generate_func):
     if DISPLAYER == 'pygame':
@@ -12,6 +20,8 @@ def create_displayer(generate_func):
         print('using arduino to display pixels')
         from arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
         return SerialPixelDisplayer(generate_func)
+    else:
+        raise Exception('unknown displayer: ' + DISPLAYER)
 
 print('press any key to exit')
 
