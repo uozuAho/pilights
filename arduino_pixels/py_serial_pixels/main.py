@@ -28,6 +28,9 @@ class SerialPixelDisplayer: # implements Displayer
                 strip.set(pixels)
                 time.sleep(0.02)
 
+    def dispose(self):
+        pass
+
 class SerialPixels:
     """ serial led strip interface, supporting Generator interface """
     def __init__(self, port, baud, brightness_limit=255):

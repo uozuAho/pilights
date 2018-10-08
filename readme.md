@@ -29,4 +29,7 @@ pygame_pixels/
 
 # todo
 
-- Implement arduino as Displayer interface
+- cleanup:
+  - make clear what's public/private
+- merge to master
+- use patterns in flask_pixels

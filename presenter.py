@@ -43,6 +43,10 @@ class Displayer:
         """ Run the display loop """
         pass
 
+    def dispose(self):
+        """ Clean up any resources """
+        pass
+
 class Presenter:
     """ Run a generator and displayer """
     def __init__(self, generator, displayer):
