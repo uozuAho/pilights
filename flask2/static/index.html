@@ -13,8 +13,12 @@
 
 <body>
     <h1>Pi Lights</h1>
+
     <button id="btn-off" type="button" class="btn btn-primary btn-lg btn-black">OFF</button>
     <button id="btn-red" type="button" class="btn btn-primary btn-lg btn-red">All red</button>
+
+    <label for="rrange">Red</label>
+    <input type="range" class="custom-range" min="0" max="255" id="rrange">
 </body>
 
 <script
@@ -29,6 +33,11 @@ $( document ).ready(function() {
     });
     $('#btn-red').on('click', function(e) {
         $.post('setall?color=red');
+    });
+    $('#rrange').on('input', function() {
+        const r = $(this).val();
+        console.log(r);
+        $.post(`setall?r=${r}`);
     });
 });
 </script>

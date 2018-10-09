@@ -50,10 +50,10 @@ def set_all():
     if color == 'red':
         set_all_rgb(200, 0, 0)
     else:
-        r = request.args.get('r')
-        g = request.args.get('g')
-        b = request.args.get('b')
-        set_all_rgb(r, g, b)
+        r = request.args.get('r') or 0
+        g = request.args.get('g') or 0
+        b = request.args.get('b') or 0
+        set_all_rgb(int(r), int(g), int(b))
     return "OK"
 
 def set_all_rgb(r, g, b):
