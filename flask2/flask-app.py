@@ -1,20 +1,32 @@
-import sys
 import argparse
+from flask import Flask, request
+import sys
+from threading import Thread
 
 sys.path.append('..')
 
-from flask import Flask, request
-# from pi_pixels import neopixels
+from pixel_generator_slave import PixelGeneratorSlave
+from pygame_pixels.pygame_pixels import PygamePixelDisplayer
 
 DESCRIPTION = """
 Web server for remote control of neopixels.
 """
 
-DEBUG = True
-NUM_LEDS = 8
+NUM_PIXELS = 43
+DISPLAYER = 'pygame'
+# DISPLAYER = 'arduino'
 
 app = Flask(__name__, static_url_path='')
 app.config.from_object(__name__)
+pixelgen = PixelGeneratorSlave(NUM_PIXELS)
+if DISPLAYER == 'pygame':
+    pixeldisp = PygamePixelDisplayer(pixelgen.generate)
+elif DISPLAYER == 'arduino':
+    raise Exception('not implemented')
+
+# run the displayer in a background thread, since it runs a blocking loop
+dispthread = Thread(target=pixeldisp.run)
+dispthread.start()
 
 
 def parse_args():
@@ -29,13 +41,23 @@ def root():
 
 @app.route('/alloff', methods=['POST'])
 def all_off():
+    set_all_rgb(0, 0, 0)
     return "OK"
 
 @app.route('/setall', methods=['POST'])
 def set_all():
     color = request.args.get('color')
-    print('color: ' + color)
+    if color == 'red':
+        set_all_rgb(200, 0, 0)
+    else:
+        r = request.args.get('r')
+        g = request.args.get('g')
+        b = request.args.get('b')
+        set_all_rgb(r, g, b)
     return "OK"
+
+def set_all_rgb(r, g, b):
+    pixelgen.set_all(r, g, b)
 
 
 if __name__ == '__main__':
