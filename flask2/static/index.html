@@ -17,8 +17,18 @@
     <button id="btn-off" type="button" class="btn btn-primary btn-lg btn-black">OFF</button>
     <button id="btn-red" type="button" class="btn btn-primary btn-lg btn-red">All red</button>
 
-    <label for="rrange">Red</label>
-    <input type="range" class="custom-range" min="0" max="255" id="rrange">
+    <div>
+        <label for="rrange">Red</label>
+        <input type="range" class="custom-range" min="0" max="255" id="rrange">
+    </div>
+    <div>
+        <label for="grange">Green</label>
+        <input type="range" class="custom-range" min="0" max="255" id="grange">
+    </div>
+    <div>
+        <label for="brange">Blue</label>
+        <input type="range" class="custom-range" min="0" max="255" id="brange">
+    </div>
 </body>
 
 <script
@@ -27,18 +37,23 @@
   crossorigin="anonymous"></script>
 
 <script>
-$( document ).ready(function() {
+$(document).ready(function() {
     $('#btn-off').on('click', function(e) {
         $.post('alloff');
     });
     $('#btn-red').on('click', function(e) {
         $.post('setall?color=red');
     });
-    $('#rrange').on('input', function() {
-        const r = $(this).val();
-        console.log(r);
-        $.post(`setall?r=${r}`);
+    $('input[type=range]').on('input', function () {
+        postSliderValues();
     });
+
+    function postSliderValues() {
+        const r = $('#rrange').val();
+        const g = $('#grange').val();
+        const b = $('#brange').val();
+        $.post(`setall?r=${r}&g=${g}&b=${b}`);
+    }
 });
 </script>
 </html>
