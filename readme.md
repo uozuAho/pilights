@@ -40,4 +40,5 @@ pygame_pixels/
 # todo
 
 - use patterns in flask_pixels
+- touch-friendly RGB sliders in flask app
 - get more patterns from neogoggles
