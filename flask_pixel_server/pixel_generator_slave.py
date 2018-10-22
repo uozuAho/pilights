@@ -10,6 +10,9 @@ class PixelGeneratorSlave:
     def __init__(self, num_pixels):
         self.pixels = [Pixel() for i in range(num_pixels)]
 
+    def set_generator(self, generator):
+        self.generator = generator
+
     def generate(self):
         return self.pixels
 
