@@ -16,6 +16,8 @@
 
     <button id="btn-off" type="button" class="btn btn-primary btn-lg btn-black">OFF</button>
     <button id="btn-red" type="button" class="btn btn-primary btn-lg btn-red">All red</button>
+    <button id="btn-rainbow" type="button" class="btn btn-primary btn-lg">Rainbow</button>
+    <button id="btn-theatre" type="button" class="btn btn-primary btn-lg">Theatre</button>
 
     <div>
         <label for="rrange">Red</label>
@@ -43,6 +45,12 @@ $(document).ready(function() {
     });
     $('#btn-red').on('click', function(e) {
         $.post('setall?color=red');
+    });
+    $('#btn-rainbow').on('click', function(e) {
+        $.post('setpattern?name=rainbow');
+    });
+    $('#btn-theatre').on('click', function(e) {
+        $.post('setpattern?name=theatre');
     });
     $('input[type=range]').on('input', function () {
         postSliderValues();

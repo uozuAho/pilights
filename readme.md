@@ -40,5 +40,7 @@ pygame_pixels/
 # todo
 
 - use patterns in flask_pixels
+- limit brightness in pi serial displayer
+- only send over serial when pixel value changes?
 - touch-friendly RGB sliders in flask app
 - get more patterns from neogoggles
