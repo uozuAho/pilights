@@ -1,20 +1,24 @@
+import sys
 from threading import Thread
 
-from pixel_generator_slave import PixelGeneratorSlave
+sys.path.append('..')
+
+from presenter import Pixel
 
 
 class PixelService:
     """ Deals with all pixel stuff required by the flask app """
     def __init__(self, num_pixels):
-        self.pixelgen = PixelGeneratorSlave(num_pixels)
+        self.num_pixels = num_pixels
+        self.generator = ConstantValueGenerator(self.num_pixels)
 
     def start_displayer(self, device):
         if device == 'pygame':
             from pygame_pixels.pygame_pixels import PygamePixelDisplayer
-            pixeldisp = PygamePixelDisplayer(self.pixelgen.generate)
+            pixeldisp = PygamePixelDisplayer(self._generate)
         elif device == 'arduino':
             from arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
-            pixeldisp = SerialPixelDisplayer(self.pixelgen.generate)
+            pixeldisp = SerialPixelDisplayer(self._generate)
         else:
             raise Exception('unknown displayer device: ' + device)
 
@@ -23,4 +27,22 @@ class PixelService:
         dispthread.start()
 
     def set_all(self, r, g, b):
-        self.pixelgen.set_all(r, g, b)
+        self.generator = ConstantValueGenerator(self.num_pixels)
+        self.generator.set_all(r, g, b)
+
+    def _generate(self):
+        return self.generator.generate()
+
+
+class ConstantValueGenerator:
+    def __init__(self, num_pixels):
+        self.pixels = [Pixel() for i in range(num_pixels)]
+
+    def generate(self):
+        return self.pixels
+
+    def set_all(self, r, g, b):
+        for p in self.pixels:
+            p.rgb[0] = r
+            p.rgb[1] = g
+            p.rgb[2] = b

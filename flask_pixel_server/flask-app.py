@@ -22,23 +22,20 @@ def root():
 
 @app.route('/alloff', methods=['POST'])
 def all_off():
-    set_all_rgb(0, 0, 0)
+    pixelservice.set_all(0, 0, 0)
     return "OK"
 
 @app.route('/setall', methods=['POST'])
 def set_all():
     color = request.args.get('color')
     if color == 'red':
-        set_all_rgb(200, 0, 0)
+        pixelservice.set_all(200, 0, 0)
     else:
         r = request.args.get('r') or 0
         g = request.args.get('g') or 0
         b = request.args.get('b') or 0
-        set_all_rgb(int(r), int(g), int(b))
+        pixelservice.set_all(int(r), int(g), int(b))
     return "OK"
-
-def set_all_rgb(r, g, b):
-    pixelservice.set_all(r, g, b)
 
 
 if __name__ == '__main__':
