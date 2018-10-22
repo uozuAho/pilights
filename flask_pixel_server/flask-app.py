@@ -37,6 +37,14 @@ def set_all():
         pixelservice.set_all(int(r), int(g), int(b))
     return "OK"
 
+@app.route('/setpattern', methods=['POST'])
+def set_pattern():
+    name = request.args.get('name')
+    if not name:
+        return 'invalid pattern name', 400
+    pixelservice.set_pattern(name)
+    return "OK"
+
 
 if __name__ == '__main__':
     args = ArgParser(DESCRIPTION).parse_args()

@@ -4,6 +4,7 @@ from threading import Thread
 sys.path.append('..')
 
 from presenter import Pixel
+import pixel_patterns.pixel_strip_patterns as patterns
 
 
 class PixelService:
@@ -30,6 +31,10 @@ class PixelService:
         self.generator = ConstantValueGenerator(self.num_pixels)
         self.generator.set_all(r, g, b)
 
+    def set_pattern(self, name):
+        self.generator = PatternGenerator(self.num_pixels)
+        self.generator.set_pattern(name)
+
     def _generate(self):
         return self.generator.generate()
 
@@ -46,3 +51,24 @@ class ConstantValueGenerator:
             p.rgb[0] = r
             p.rgb[1] = g
             p.rgb[2] = b
+
+
+class PatternGenerator:
+    def __init__(self, num_pixels):
+        self.num_pixels = num_pixels
+        self.patterns = {
+            'rainbow': lambda: patterns.Rainbow(self.num_pixels),
+            'colorwipe': lambda: patterns.ColorWiper(self.num_pixels, Pixel(100, 0, 100), 50),
+            'rainbow_cycle': lambda: patterns.RainbowCycle(self.num_pixels),
+            'theatre': lambda: patterns.TheatreChaser(self.num_pixels, Pixel(100, 0, 100), 50)
+        }
+        self.generator = self._get_generator('rainbow')
+
+    def set_pattern(self, name):
+        self.generator = self._get_generator(name)
+
+    def generate(self):
+        return self.generator.generate()
+
+    def _get_generator(self, name):
+        return self.patterns[name]()
