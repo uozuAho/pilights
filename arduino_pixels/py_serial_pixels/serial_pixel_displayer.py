@@ -12,10 +12,24 @@ class SerialPixelDisplayer: # implements Displayer
 
     def run(self):
         with _SerialPixels(self.port, self.baud) as strip:
+            pixels_before = None
             while True:
                 pixels = self.generate()
-                strip.set(pixels)
+                # only set pixels if any value has changed. this stops spamming the serial
+                # port while nothing's happening.
+                if pixels_before and not self.are_pixel_vals_same(pixels, pixels_before):
+                    strip.set(pixels)
+                pixels_before = pixels
                 time.sleep(0.02)
+
+    def are_pixel_vals_same(self, pixels1, pixels2):
+        if len(pixels1) != len(pixels2):
+            return False
+        for p1, p2 in zip(pixels1, pixels2):
+            if p1.rgb[0] != p2.rgb[0]: return False
+            if p1.rgb[1] != p2.rgb[1]: return False
+            if p1.rgb[2] != p2.rgb[2]: return False
+        return True
 
     def dispose(self):
         pass
