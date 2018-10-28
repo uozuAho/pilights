@@ -12,14 +12,9 @@ class SerialPixelDisplayer: # implements Displayer
 
     def run(self):
         with _SerialPixels(self.port, self.baud) as strip:
-            pixels_before = None
             while True:
                 pixels = self.generate()
-                # only set pixels if any value has changed. this stops spamming the serial
-                # port while nothing's happening.
-                if pixels_before and not self.are_pixel_vals_same(pixels, pixels_before):
-                    strip.set(pixels)
-                pixels_before = pixels
+                strip.set(pixels)
                 time.sleep(0.02)
 
     def are_pixel_vals_same(self, pixels1, pixels2):
@@ -41,6 +36,7 @@ class _SerialPixels:
         self.STOP_BYTE = 255
         self.serial = serial.Serial(port, baud)
         self.brightness_limit = brightness_limit
+        self.current_rgb_vals = None
 
     def __enter__(self):
         return self
@@ -58,6 +54,12 @@ class _SerialPixels:
                 pixels: array of presenter.Pixel
         """
         rgb_array = [int(x) for pixel in pixels for x in pixel.rgb]
+        if self._are_rgb_arrays_equal(rgb_array, self.current_rgb_vals):
+            # if led values are the same, don't bother sending. This stops
+            # spamming the serial port when nothing's happening... dunno if that's necessary,
+            # but it keeps me up at night.
+            return
+        self.current_rgb_vals = rgb_array
         self._check_values(rgb_array)
         self._set_leds(rgb_array)
 
@@ -68,6 +70,16 @@ class _SerialPixels:
                 rgb_array[i] = self.brightness_limit
             if value == self.STOP_BYTE:
                 rgb_array[i] -= 1
+
+    def _are_rgb_arrays_equal(self, arr1, arr2):
+        if not arr1 or not arr2:
+            return False
+        if len(arr1) != len(arr2):
+            return False
+        for a1, a2 in zip(arr1, arr2):
+            if a1 != a2:
+                return False
+        return True
 
     def _set_leds(self, rgb_array):
         self.serial.write(bytes(list(rgb_array) + [self.STOP_BYTE]))
