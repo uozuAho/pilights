@@ -39,8 +39,6 @@ pygame_pixels/
 
 # todo
 
-- run flask server on pi start
-- limit brightness in pi serial displayer
-- only send over serial when pixel value changes?
+- run on pi startup. rc.local not working. why? no logs.
 - touch-friendly RGB sliders in flask app
 - get more patterns from neogoggles
