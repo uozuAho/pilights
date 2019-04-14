@@ -42,8 +42,9 @@ class PygamePixelDisplayer:
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN:
-                    print('exiting due to keypress...')
-                    done = True
+                    if event.key == pygame.K_ESCAPE:
+                        print('escape pressed. quitting...')
+                        done = True
             for pgpixel, pixel in zip(self.pixels, self.generate_pixels()):
                 pgpixel.rgb = pixel.rgb
             self.render(self.pixels)

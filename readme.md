@@ -42,3 +42,8 @@ pygame_pixels/
 - run on pi startup. rc.local not working. why? no logs.
 - touch-friendly RGB sliders in flask app
 - get more patterns from neogoggles
+
+
+## discovery todo
+
+- 'client' the wrong word? what about friends?
