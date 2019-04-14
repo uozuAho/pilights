@@ -14,11 +14,9 @@
 <body>
     <h1>Pi Lights client list</h1>
 
-    {% if name %}
-      <h1>Hello {{ name }}!</h1>
-    {% else %}
-      <h1>Hello, World!</h1>
-    {% endif %}
+    {% for friend in friends %}
+      <p>{{ friend }}</p>
+    {% endfor %}
 
 </body>
 
