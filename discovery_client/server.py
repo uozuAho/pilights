@@ -14,10 +14,9 @@ def main():
 
     while True:
         data, addr = skt.recvfrom(1024)
-        print("received message: %s"%data)
+        print("received '{}' from '{}'".format(data, addr))
         if data == "just nod if you can hear me":
-            # todo: don't broadcast - send back to sender
-            skt.sendto(SERVER_NAME, ('<broadcast>', PORT_SEND))
+            skt.sendto(SERVER_NAME, (addr[0], PORT_SEND))
 
 
 if __name__ == "__main__":
