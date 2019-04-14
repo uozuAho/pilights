@@ -15,7 +15,7 @@
     <h1>Pi Lights client list</h1>
 
     {% for friend in friends %}
-      <p>{{ friend }}</p>
+      <a href="http://{{friend.ip_addr}}:5000">{{ friend.name }}</a>
     {% endfor %}
 
 </body>
