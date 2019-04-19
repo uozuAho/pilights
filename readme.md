@@ -24,8 +24,14 @@ arduino_pixels/
     - Control neopixels with an arduino. Contains arduino 'serial slave' firmware + serial host
       app written in python.
 
+discovery_client/
+    - discover other pilights on the local network
+
 flask_pixel_server/
     - flask web app to control all the pixels
+
+phat_pixels/
+    - Control a Pimoroni pHAT
 
 pi_pixels/
     - Control neopixels with a raspberry pi, using the pi's IO pins.
@@ -39,11 +45,8 @@ pygame_pixels/
 
 # todo
 
+- discovery: 'client' the wrong word? what about friends?
+- discovery: integrate with flask server?
 - run on pi startup. rc.local not working. why? no logs.
 - touch-friendly RGB sliders in flask app
 - get more patterns from neogoggles
-
-
-## discovery todo
-
-- 'client' the wrong word? what about friends?
