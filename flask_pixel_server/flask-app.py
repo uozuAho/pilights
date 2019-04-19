@@ -2,6 +2,7 @@ from arg_parser import ArgParser
 from flask import Flask, request
 
 from pixel_service import PixelService
+import clients_page
 
 
 DESCRIPTION = """
@@ -19,6 +20,10 @@ pixelservice = None
 @app.route('/')
 def root():
     return app.send_static_file('index.html')
+
+@app.route('/clients')
+def clients():
+    return clients_page.clients()
 
 @app.route('/alloff', methods=['POST'])
 def all_off():
