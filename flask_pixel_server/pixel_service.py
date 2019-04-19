@@ -20,6 +20,9 @@ class PixelService:
         elif device == 'arduino':
             from arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
             pixeldisp = SerialPixelDisplayer(self._generate)
+        elif device == 'phat':
+            from phat_pixels.phat_displayer import PhatDisplayer
+            pixeldisp = PhatDisplayer(self._generate)
         else:
             raise Exception('unknown displayer device: ' + device)
 
