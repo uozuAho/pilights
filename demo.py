@@ -20,6 +20,10 @@ def create_displayer(generate_func):
         print('using arduino to display pixels')
         from arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
         return SerialPixelDisplayer(generate_func)
+    elif DISPLAYER == 'phat':
+        print('using unicorn pHAT to display pixels')
+        from phat_pixels.phat_displayer import PhatDisplayer
+        return PhatDisplayer(generate_func)
     else:
         raise Exception('unknown displayer: ' + DISPLAYER)
 
