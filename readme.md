@@ -20,27 +20,17 @@ Host a web app that controls connected pixels (or pygame-emulated pixels):
 
 # Directory structure
 
-arduino_pixels/
-    - Control neopixels with an arduino. Contains arduino 'serial slave' firmware + serial host
-      app written in python.
-
 discovery_client/
     - discover other pilights on the local network
 
 flask_pixel_server/
     - flask web app to control all the pixels
 
-phat_pixels/
-    - Control a Pimoroni pHAT
-
-pi_pixels/
-    - Control neopixels with a raspberry pi, using the pi's IO pins.
+light_drivers/
+    - control various light hardware, eg neopixels, pygame renderer
 
 pixel_patterns/
     - neopixel strip patterns that can be used anywhere
-
-pygame_pixels/
-    - emulate pixels on the screen, using pygame
 
 
 # todo

@@ -3,7 +3,7 @@ import sys
 
 sys.path.append('..')
 
-from presenter import Pixel
+from light_drivers.interfaces import Pixel
 
 
 BLACK = (0, 0, 0)

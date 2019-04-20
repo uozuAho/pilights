@@ -3,7 +3,7 @@ from threading import Thread
 
 sys.path.append('..')
 
-from presenter import Pixel
+from light_drivers.interfaces import Pixel
 import pixel_patterns.pixel_strip_patterns as patterns
 
 
@@ -15,13 +15,13 @@ class PixelService:
 
     def start_displayer(self, device):
         if device == 'pygame':
-            from pygame_pixels.pygame_pixels import PygamePixelDisplayer
+            from light_drivers.pygame_pixels.pygame_pixels import PygamePixelDisplayer
             pixeldisp = PygamePixelDisplayer(self._generate)
         elif device == 'arduino':
-            from arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
+            from light_drivers.arduino_pixels.py_serial_pixels.serial_pixel_displayer import SerialPixelDisplayer
             pixeldisp = SerialPixelDisplayer(self._generate)
         elif device == 'phat':
-            from phat_pixels.phat_displayer import PhatDisplayer
+            from light_drivers.phat_pixels.phat_displayer import PhatDisplayer
             pixeldisp = PhatDisplayer(self._generate)
         else:
             raise Exception('unknown displayer device: ' + device)

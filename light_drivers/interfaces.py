@@ -15,14 +15,6 @@ class Pixel:
         self.rgb[1] = pixel.rgb[1]
         self.rgb[2] = pixel.rgb[2]
 
-class Generator:
-    def generate(self):
-        """ Generate an array of pixels
-
-        Returns:
-            Array(Pixel)
-        """
-        return []
 
 class Displayer:
     def __init__(self, generate):
@@ -46,13 +38,3 @@ class Displayer:
     def dispose(self):
         """ Clean up any resources """
         pass
-
-class Presenter:
-    """ Run a generator and displayer """
-    def __init__(self, generator, displayer):
-        self.generator = generator
-        self.displayer = displayer
-        self.displayer.set_generate(generator.generate)
-
-    def run(self):
-        self.displayer.run()

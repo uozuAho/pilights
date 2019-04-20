@@ -3,7 +3,7 @@ import time
 
 sys.path.append('..')
 
-from presenter import Pixel
+from light_drivers.interfaces import Pixel
 
 
 NUM_PIXELS = 40
