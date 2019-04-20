@@ -28,7 +28,7 @@ def main():
 
     print('press ctrl-c to exit')
 
-    patterns = BunchOfPatterns()
+    patterns = BunchOfPatterns(args.num_pixels)
     displayer = create_displayer(patterns.generate)
     try:
         displayer.run()
@@ -42,8 +42,8 @@ class ArgParser:
 
     def parse_args(self):
         arg_parser = argparse.ArgumentParser(description=self.description)
-        arg_parser.add_argument('--num_pixels', help='number of pixels on the device', type=int)
-        arg_parser.add_argument('--device', help='set the display device (default: %(default)s)',
+        arg_parser.add_argument('-n', '--num_pixels', help='number of pixels on the device', type=int, default=10)
+        arg_parser.add_argument('-d', '--device', help='set the display device (default: %(default)s)',
             choices=['pygame', 'arduino', 'phat'],
             default='pygame')
         return arg_parser.parse_args()

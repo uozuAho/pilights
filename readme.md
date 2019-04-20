@@ -9,7 +9,7 @@ on a raspberry pi.
 
 Demo the LED patterns on a PC:
 
-    python3 demo.py
+    python3 pixel_patterns/demo.py
 
 Host a web app that controls connected pixels (or pygame-emulated pixels):
 
@@ -28,9 +28,11 @@ flask_pixel_server/
 
 light_drivers/
     - control various light hardware, eg neopixels, pygame renderer
+    - go here to add & test your own device. drivers should implement the 'Displayer' interface
 
 pixel_patterns/
-    - neopixel strip patterns that can be used anywhere
+    - RGB strip patterns that can be used anywhere
+    - use `demo.py` in here to test out patterns on your device
 
 
 # todo

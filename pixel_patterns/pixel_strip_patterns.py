@@ -6,20 +6,17 @@ sys.path.append('..')
 from light_drivers.interfaces import Pixel
 
 
-NUM_PIXELS = 40
-
-
 class BunchOfPatterns: # implements Generator
 
-    def __init__(self):
+    def __init__(self, num_pixels):
         self.last_change_time = 0
-        self.current_generator = RainbowCycle(NUM_PIXELS)
+        self.current_generator = RainbowCycle(num_pixels)
         self.generator_idx = 0
         self.generators = [
-            lambda: ColorWiper(NUM_PIXELS, Pixel(0, 255, 0), 30),
-            lambda: TheatreChaser(NUM_PIXELS, Pixel(127, 127, 127), 50),
-            lambda: Rainbow(NUM_PIXELS),
-            lambda: RainbowCycle(NUM_PIXELS)
+            lambda: ColorWiper(num_pixels, Pixel(0, 255, 0), 30),
+            lambda: TheatreChaser(num_pixels, Pixel(127, 127, 127), 50),
+            lambda: Rainbow(num_pixels),
+            lambda: RainbowCycle(num_pixels)
         ]
 
     def generate(self):
